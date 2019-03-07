@@ -1,0 +1,116 @@
+***to Capture date while replicating=>
+   Step 1 - se38 > fbgendat
+   Step 2 - Fm > bapi_salesdocu_proxy_upload 
+             select MODE B, activate this entry
+             then resend bdoc from crm.
+   step 3 - se 37 > bapi_salesdocu_proxy_upload  
+   f8>test data directory>save test data and debug if error
+   then again delete the entry.
+
+***to delete errors > se38 > CRM_MESSAGES_DELETE 
+
+***to update profit centre > mass > BUS2032
+
+***billing block will not be replicated when items kept in rejection status.
+
+***TO update billing block > ZK_SET_BILLING_BLOCK 		
+
+***To remove multiple payer>multiple invoice split in front end.
+
+***To check order Header details se11 > table CRMD_ORDERADM_H
+
+***To check order Item details se11 > table CRMD_ORDERADM_I
+KNA1 - Accounts
+KNVK - Contact
+
+****To check validity of product > zvk13 > zk_expired_product
+
+***to check/change the status - ZK_STATUS_UTILITY / ZOPPORT_STATUS_CHANGE
+***to check/change the status in ISP - I_CHANGE_STATUS 
+                                table tj30t > take status code
+****to unlock order stuck in queue then use - se38 > CRM_CHECK_DISTRIBUTION_STATUS
+****to maintain currency relationship in ISP  >  Table ZVCURR_CHG_ORDER 
+
+****to unlock the distributed order using FM > se37 > CRM_STATUS_CHANGE_INTERN_MULTI > 
+    write object number(GUID from crmd_orderadm_h table ) and status (from zk_status_utility) and execute the process.
+
+***To check order monitoring status/to check any errors - ZK_ORDER_ANALYSIS
+
+***the replacement order failed error > go to actions > repeat and execute tenant transfer request
+
+***to change the renewal status > ZK_UPDATE_STATUS_RENEWAL  (this report only works for renewal orders)
+
+***to compare order in IC* and IS* system use > ZK_ORDER_COMPARE_CRM_R3 
+
+*** ZCRM_ERROR_MAINTAIN
+
+***to create credit memo > va01> zk07
+ 
+***to find bussiness partner detail use in ICP > BP
+
+**** Important Badis > EXEC_METHODCALL_PPF , EVAL_STARTCOND_PPF, EVAL_SCHEDCOND_PPF
+ 
+***to view user su01d
+
+***to Monitor business partner data exchange in crm > /ocrmm_bupa_map
+
+***to check why BLock renewal not converting to Active renewal
+   1. Item  block set 
+   2. HEC product (zvk13 - ZK_HEC_PRODUCTS)
+   ZK_UPDATE_STATUS_RENEWAL
+   debug - process orders --breakpoint at update renewal type-- at line 357, save -263
+  
+ ***generic condition TCode
+   zvk13- ZK_HEC_PRODUCTS
+   Zvk12- change 
+   zvk11- create  
+
+****to change status from ISP manually
+    table > TJ30T
+    FM    > I_CHANGE_STATUS
+
+****Class/Interface      ZCL_IM_K_TERMINATE_DOC 
+    method               IF_EX_EXEC_METHODCALL_PPF~EXECUTE 
+
+****to create/change condition record > zvk12/13 > fieldchange
+****to create RA order > va43
+****To debug and change anything from frot end > nbsp_wd_cmpwb > Component name
+**** to check next renewal oppt > se38 > ZK0670_RNW_OPPORTUNITY_UI 
+****To check product lock > zvk13 > zk_expired_product 
+****Monitoring report for store / Hybris orders: ZK_IF_APPS_LOG_MONITOR
+****If quote is not saving then use this class to debug ZCL_IM_CL_BPARCHCHCK_ORDER  
+****FOrlock entries by crm_icp > sm12 in ISP
+****Tcode to find action start condition >  crmc_action_conf, crmc_action_def
+****spro > crm > basic functions > action > action in Transaction > change actions and conditions
+****To monitor job of C&B > file:///\\DWDF213.wdf.sap.corp\IT_SPM\06_TCS\04_Incident_Management\BO_C&B\Monitoring\Could_O2C_Jobs_List.xlsx
+****To check product with sales org > commpr01
+****Pricing CMS Quote dat >  ZK_QUOTE_PRINT_DATA_CMS_INTF
+****BP details in ISP >  VAP3
+****report to repair the documents > CRM_STATUS_OBJECT_CREATE 
+****To check status issue use FM > CRM_STATUS_BEFORE_REJECT_EC
+
+Z_K_DATE_RULE_ZK_NEXT_REN 
+zcl_im_l+remewal_create---execute method , line 801                                           
+
+to delete entry from crm :  CRM0_CRMKEY_DELETE
+
+https://wiki.wdf.sap.corp/wiki/display/NDEX/Harmony+App+Quick+Links 
+https://code-fiori.dispatcher.cert.hana.ondemand.com/ 
+
+****bsp_wd_cmpwb > BT111H_OPPT/BT116H_SVRO
+**** To check why items not added from quote to order crmc_action_def > Zk01 > action def(Initial order) > go to method and display implementation
+**** To check Profit center in ISP > Tcode KE53
+**** To link renewal order with initial order > se37 > BINARY_RELATION_CREATE_COMMIT, role > VONA
+**** ZV_SET_NEG_MENG_TO_POS .... to change negative qy=uantity to positive in ISP
+*****FM for Profit center in ISP... Z_V51_PCZ
+*****Order replication to another system.... Z_CI_MONITOR...... srt_moni or SXMB_MONI
+In ISP > ZVSETZZURVBELN  
+
+
+
+
+
+
+
+
+
