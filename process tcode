@@ -106,6 +106,18 @@ https://code-fiori.dispatcher.cert.hana.ondemand.com/
 *****Order replication to another system.... Z_CI_MONITOR...... srt_moni or SXMB_MONI
 In ISP > ZVSETZZURVBELN  
 
+****To make changes in BOL : TCODE> genil_bol_browser, Give Component and execute > double click on BTQuery1O and give obkect ID
+
+****To Debug the issue from Front end:
+1.	Enter TCODE: nbsp_wd_cmpwb 
+2.	Enter component name (BT116H_SRVO) > Display
+3.	Expand Views from Component Structure Browser
+4.	Select the view which will get from technical details from WEB UI page 
+e.g. - BT116H_SRVO/Details.
+5.	Double click on implementation class: it will take to the method of that class
+6.	Double click on Method: DO_HANDLE_EVENT > Put the External Breakpoint
+7.	And do the operation from front end and it will direct to debugger mode.
+
 
 
 
